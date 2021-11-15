@@ -1,0 +1,5 @@
+Homework 4
+1a. The best data structure to hold an association between a user address and their balance (and most types of similar associations) is a mapping.
+2a. One way to allow the balance variable to be read from the contract is through the implementation of a getter function. The other way is using the getter function that is automatically created by the Solidity compiler when you declare a public variable.
+4a. We don't need the sender's address as a function parameter because it is already automatically included as the 'sender' attribute of the global 'msg' object.
+4b. The implication would be increased gas costs because the the extra data we are sending.

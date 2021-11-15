@@ -1,0 +1,15 @@
+Imagine you are designing a new blockchain system:
+
+What behavior/aspects of the system do you want to encourage?
+
+I'd want the system to truly be decentralized and open, with a governance system for stakeholders. I would want it to be a proof-of-stake system to reduce energy usage and to improve security.
+
+What behavior/aspects of the system do you want to discourage?
+
+I'd want to discourage dishonest practices like miner extracted value (MEV) and centralization.
+
+What means do you have for this incentivisation?
+
+In this proof-of-stake, I'd want new block proposers to be chosen proportionally to the amount of stake they have (up to a certain point) and any stakeholder would be able to check the proposed block and flag it as invalid (or as breaking some rule of conduct). If the proposed block is invalid, a portion of the proposer's stake get slashed (with a smaller portion of that slashed stake going to the entity that reported the invalid block). If the report was false (i.e. the proposed block was valid) the reporter get a smaller punishment (probably the cost of gas for making the 'report' transaction).
+
+As far as deincentivising MEV, I think that may be more challenging, considering Ethereum has only recently found ways to combat it (namely using flashbots to make the process more fair), but without diving deep into the mempool and the process of creating blocks I'd imagine that having a protocol which randomizes transaction order in a block after it has been submitted by the miner would be a good way of combatting this issue.

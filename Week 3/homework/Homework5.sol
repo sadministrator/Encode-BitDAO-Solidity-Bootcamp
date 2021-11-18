@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: UNLICENSED
-// Rinkeby Address: 0xBBc6ABDc9D74c1C11C7C4F5Eb9F7517D150Ea75C
+// Rinkeby Address: 0xB770DFc9629c04FA3aFce825ca96D4245fF2A053
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
@@ -8,7 +8,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract VolcanoCoin is Ownable, ERC20 {
     struct Payment {
-        address receiver;
+        address recipient;
         uint amount;
     }
     
@@ -17,22 +17,19 @@ contract VolcanoCoin is Ownable, ERC20 {
     event supplyChange(uint);
 
     constructor() ERC20("VolcanoCoin", "VLCN") {
-        _mint(msg.sender, 1000);
-        transfer(msg.sender, 1000);
+        _mint(msg.sender, 1000 * (10 ** uint(decimals())));
+        transfer(msg.sender, 1000 ether);
     }
     
     function increaseTotalSupply() public onlyOwner {
         _mint(owner(), 1000);
         emit supplyChange(totalSupply());
     }
-    
-    function createPaymentRecord(address sender, address receiver, uint amount) public {
-        Payment memory payment = Payment(receiver, amount);
-        payments[sender].push(payment);
-    }
-    
-    function transferWithRecord(address receiver, uint amount) public {
-        transfer(receiver, amount);
-        createPaymentRecord(msg.sender, receiver, amount);
+
+    function transfer(address recipient, uint256 amount) public override returns (bool){
+        Payment memory payment = Payment(recipient, amount);
+        payments[msg.sender].push(payment);
+
+        return transfer(recipient, amount);
     }
 }

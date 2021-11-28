@@ -30,6 +30,6 @@ contract VolcanoCoin is Ownable, ERC20 {
         Payment memory payment = Payment(recipient, amount);
         payments[msg.sender].push(payment);
 
-        return transfer(recipient, amount);
+        return super.transfer(recipient, amount);
     }
 }
